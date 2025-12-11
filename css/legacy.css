@@ -1,0 +1,14 @@
+body {
+    background-color: #0f172a !important;
+    color: #f1f5f9 !important;
+    font-family: 'Noto Sans JP', sans-serif !important;
+}
+table {
+    border-color: rgba(255,255,255,0.1) !important;
+}
+td, th {
+    color: #f1f5f9 !important;
+}
+a {
+    color: #00d2ff !important;
+}

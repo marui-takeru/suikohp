@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活動アーカイブ | 水工学研究室</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .archive-list {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .archive-year {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .archive-year h3 {
+            color: var(--secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .archive-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .archive-links li {
+            margin-bottom: 1rem;
+        }
+
+        .archive-links a {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .archive-links a:hover {
+            background: rgba(255, 255, 255, 0.08);
+            /* slightly lighter for hover */
+            transform: translateX(10px);
+            color: var(--secondary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">水工学研究室</div>
+        <nav>
+            <ul>
+                <li><a href="index.html#about">研究室について</a></li>
+                <li><a href="index.html#research">研究テーマ</a></li>
+                <li><a href="index.html#members">メンバー</a></li>
+                <li><a href="index.html#news">活動ブログ</a></li>
+                <li><a href="index.html#access">アクセス</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Header Filler -->
+    <div style="height: 80px;"></div>
+
+    <section>
+        <div class="section-title">
+            <p>ARCHIVE</p>
+            <h2>過去のイベント・活動</h2>
+        </div>
+
+        <div class="archive-list">
+            <!-- 2025 -->
+            <div class="archive-year">
+                <h3>2025年度</h3>
+                <ul class="archive-links">
+                    <li><a href="event/event-25/0629softball.html">2025.06.29 ソフトボール大会</a></li>
+                    <li><a href="event/event-25/0518hijikawasuibou.html">2025.05.18 肱川水防演習</a></li>
+                    <li><a href="event/event-25/0405hanami.html">2025.04.05 お花見・新歓</a></li>
+                </ul>
+            </div>
+
+            <!-- 2024 -->
+            <div class="archive-year">
+                <h3>2024年度</h3>
+                <ul class="archive-links">
+                    <li><a href="event/event-24.html">2024年度 活動一覧</a></li>
+                </ul>
+            </div>
+
+            <!-- 2023 -->
+            <div class="archive-year">
+                <h3>2023年度</h3>
+                <ul class="archive-links">
+                    <li><a href="event/event-23.html">2023年度 活動一覧</a></li>
+                </ul>
+            </div>
+
+            <!-- Older -->
+            <div class="archive-year">
+                <h3>アーカイブ</h3>
+                <ul class="archive-links">
+                    <li><a href="event/event-22.html">2022年度</a></li>
+                    <li><a href="event/event-21.html">2021年度</a></li>
+                    <li><a href="event/event-20.html">2020年度</a></li>
+                    <li><a href="event/event-19.html">2019年度</a></li>
+                    <li><a href="event/event-18.html">2018年度</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h2>愛媛大学 工学部 社会基盤工学科<br>水工学研究室</h2>
+        <p>〒790-8577 愛媛県松山市文京町3</p>
+        <p style="margin-top: 2rem; font-size: 0.8rem; color: #555;">&copy; 2025 Hydraulic Engineering Laboratory. All
+            Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>
