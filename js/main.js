@@ -1,47 +1,56 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Header Scroll Effect
+    // ── Header scroll ──────────────────────────────────
     const header = document.querySelector('header');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+        header.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
 
-    // Reveal on Scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-    };
+    // ── Mobile hamburger menu ──────────────────────────
+    const toggle = document.querySelector('.nav-toggle');
+    const navList = document.querySelector('nav ul');
 
+    if (toggle && navList) {
+        toggle.addEventListener('click', () => {
+            const open = navList.classList.toggle('open');
+            toggle.classList.toggle('open', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+        });
+
+        // Close on nav link click
+        navList.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('open');
+                toggle.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+    }
+
+    // ── Reveal on scroll ───────────────────────────────
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('visible');
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-    // Select elements to animate
-    const cards = document.querySelectorAll('.card');
-    const sections = document.querySelectorAll('.section-title');
-    const newsItems = document.querySelectorAll('.news-item');
-
-    // Apply initial styles and observe
-    [...cards, ...sections, ...newsItems].forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-
-        // Add slight delay for grid items
-        if (el.classList.contains('card')) {
-            el.style.transitionDelay = `${index % 3 * 0.1}s`;
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+        // Stagger cards in grids
+        if (el.closest('.research-grid') || el.closest('.blog-grid') || el.closest('.member-grid')) {
+            const siblings = el.parentElement.querySelectorAll('.reveal');
+            const idx = Array.from(siblings).indexOf(el);
+            el.style.transitionDelay = `${(idx % 4) * 0.08}s`;
         }
-
         observer.observe(el);
     });
+
+    // Also animate section-title elements
+    document.querySelectorAll('.section-title').forEach(el => {
+        el.classList.add('reveal');
+        observer.observe(el);
+    });
+
 });
