@@ -337,12 +337,8 @@ section {
   line-height: 1.95;
 }
 
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  margin-top: 3rem;
-}
+/* stats-row removed from HTML; hide via CSS for any cached browser versions */
+.stats-row { display: none !important; }
 .stat-item {
   background: var(--bg-card);
   border: 1px solid var(--border-base);
@@ -399,10 +395,13 @@ section {
   overflow: hidden;
 }
 
-/* Research cards: show full image without cropping */
+/* Research cards: show full image, no hover zoom overflow */
+.research-grid .card {
+  overflow: hidden;  /* clip children so nothing escapes card bounds */
+}
 .research-grid .card-img-wrapper {
   height: auto;
-  overflow: visible;
+  overflow: hidden;
 }
 .research-grid .card-img-wrapper::after { display: none; }
 .research-grid .card-img {
@@ -410,6 +409,21 @@ section {
   height: auto;
   object-fit: unset;
   transform: none !important;
+}
+.research-grid .card:hover .card-img { transform: none; }
+
+/* Card topic tag badge */
+.card-tag {
+  display: inline-block;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  border: 1px solid rgba(14, 165, 233, .35);
+  border-radius: 4px;
+  padding: .15rem .5rem;
+  margin-bottom: .65rem;
 }
 
 .card-img-wrapper::after {
@@ -644,6 +658,29 @@ footer .footer-copy {
   font-size: .78rem;
   color: rgba(127, 163, 192, .35);
 }
+.footer-sns {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+.footer-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: .82rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border: 1px solid var(--border-base);
+  border-radius: 24px;
+  padding: .45rem 1rem;
+  transition: border-color .25s, color .25s;
+}
+.footer-sns a:hover {
+  border-color: var(--border-accent);
+  color: var(--text-accent);
+}
+.footer-sns svg { flex-shrink: 0; }
 
 /* ── Reveal animations ────────────────────────────────── */
 .reveal {
