@@ -12,3 +12,19 @@ td, th {
 a {
     color: #00d2ff !important;
 }
+
+/* Hide old navigation and header elements */
+#menu,
+#icatch,
+#navi,
+div.menu,
+div.navi,
+div.header,
+div#header {
+    display: none !important;
+}
+
+/* Add top padding so injected header doesn't overlap content */
+body {
+    padding-top: 64px !important;
+}

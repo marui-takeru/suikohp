@@ -398,6 +398,20 @@ section {
   height: 200px;
   overflow: hidden;
 }
+
+/* Research cards: show full image without cropping */
+.research-grid .card-img-wrapper {
+  height: auto;
+  overflow: visible;
+}
+.research-grid .card-img-wrapper::after { display: none; }
+.research-grid .card-img {
+  width: 100%;
+  height: auto;
+  object-fit: unset;
+  transform: none !important;
+}
+
 .card-img-wrapper::after {
   content: '';
   position: absolute;
