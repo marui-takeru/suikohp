@@ -1,9 +1,9 @@
 (function () {
   'use strict';
 
-  /* ── Hide old nav/header elements immediately ────────── */
+  /* ── Hide old nav/header/footer elements immediately ─── */
   var hideStyle = document.createElement('style');
-  hideStyle.textContent = '#menu,#icatch,#navi,#header,div.menu,div.navi{display:none!important}body{padding-top:64px!important}';
+  hideStyle.textContent = '#menu,#icatch,#navi,#header,div.menu,div.navi,div#footer,div#footMenu{display:none!important}body{padding-top:64px!important}';
   document.head.appendChild(hideStyle);
 
   /* ── Inject Google Fonts (Inter) ─────────────────────── */
@@ -98,6 +98,48 @@
   back.textContent = '\u2190 \u30d6\u30ed\u30b0\u4e00\u89a7';
   header.appendChild(back);
 
-  /* ── Insert at top of body ────────────────────────────── */
+  /* ── Insert header at top of body ─────────────────────── */
   document.body.insertBefore(header, document.body.firstChild);
+
+  /* ── Build & inject footer at end of body ─────────────── */
+  var footer = document.createElement('div');
+  footer.id = 'event-footer';
+
+  var fLogo = document.createElement('div');
+  fLogo.className = 'ef-logo';
+  /* \u6c34\u5de5\u5b66\u7814\u7a76\u5ba4 = 水工学研究室 */
+  fLogo.textContent = '\u6c34\u5de5\u5b66\u7814\u7a76\u5ba4';
+  footer.appendChild(fLogo);
+
+  var fAddr = document.createElement('div');
+  fAddr.className = 'ef-address';
+  /* 愛媛大学 工学部 社会基盤工学科 / 〒790-8577 愛媛県松山市文京町3 */
+  fAddr.innerHTML =
+    '\u611b\u5a9b\u5927\u5b66 \u5de5\u5b66\u90e8 \u793e\u4f1a\u57fa\u76e4\u5de5\u5b66\u79d1<br>' +
+    '\u3012790-8577 \u611b\u5a9b\u770c\u677e\u5c71\u5e02\u6587\u4eac\u753a3';
+  footer.appendChild(fAddr);
+
+  var fSns = document.createElement('div');
+  fSns.className = 'ef-sns';
+  var fInsta = document.createElement('a');
+  fInsta.href = 'https://www.instagram.com/suiko.lab.ehime?igsh=bWUyc3FoMjl5enpq&utm_source=qr';
+  fInsta.target = '_blank';
+  fInsta.rel = 'noopener noreferrer';
+  fInsta.innerHTML =
+    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
+    '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>' +
+    '<circle cx="12" cy="12" r="4"/>' +
+    '<circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>' +
+    '</svg> @suiko.lab.ehime';
+  fSns.appendChild(fInsta);
+  footer.appendChild(fSns);
+
+  var fCopy = document.createElement('p');
+  fCopy.className = 'ef-copy';
+  /* © 2025 Hydraulic Engineering Laboratory... */
+  fCopy.textContent = '\u00a9 2025 Hydraulic Engineering Laboratory, Ehime University. All Rights Reserved.';
+  footer.appendChild(fCopy);
+
+  document.body.appendChild(footer);
+
 })();
