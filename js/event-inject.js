@@ -1,6 +1,20 @@
 (function () {
   'use strict';
 
+  /* ── Detect site base URL from this script's own src ─────
+     Works on localhost (/js/event-inject.js)
+     AND GitHub Pages (/suikohp/js/event-inject.js)        */
+  var _src  = (document.currentScript || {}).src || '';
+  var _base = _src.replace(/\/js\/event-inject\.js([?#].*)?$/, '');
+  /* e.g. http://localhost:8080  or
+          https://marui-takeru.github.io/suikohp           */
+
+  /* ── Inject legacy.css (no separate <link> needed in HTML) */
+  var cssLink = document.createElement('link');
+  cssLink.rel  = 'stylesheet';
+  cssLink.href = _base + '/css/legacy.css';
+  document.head.appendChild(cssLink);
+
   /* ── Hide old nav/header/footer elements immediately ─── */
   var hideStyle = document.createElement('style');
   hideStyle.textContent = '#menu,#icatch,#navi,#header,div.menu,div.navi,div#footer,div#footMenu{display:none!important}body{padding-top:64px!important}';
@@ -8,7 +22,7 @@
 
   /* ── Inject Google Fonts (Inter) ─────────────────────── */
   var fontLink = document.createElement('link');
-  fontLink.rel = 'stylesheet';
+  fontLink.rel  = 'stylesheet';
   fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&display=swap';
   document.head.appendChild(fontLink);
 
@@ -65,7 +79,7 @@
   /* Unicode escapes ensure correct rendering regardless of page charset */
   var logo = document.createElement('a');
   logo.className = 'eh-logo';
-  logo.href = '/';
+  logo.href = _base + '/';
   /* \u6c34\u5de5\u5b66\u7814\u7a76\u5ba4 = 水工学研究室 */
   logo.textContent = '\u6c34\u5de5\u5b66\u7814\u7a76\u5ba4';
   header.appendChild(logo);
@@ -73,15 +87,15 @@
   var nav = document.createElement('nav');
   var navLinks = [
     /* \u30db\u30fc\u30e0 = ホーム */
-    { href: '/',            label: '\u30db\u30fc\u30e0' },
+    { href: _base + '/',            label: '\u30db\u30fc\u30e0' },
     /* \u7814\u7a76\u30c6\u30fc\u30de = 研究テーマ */
-    { href: '/#research',   label: '\u7814\u7a76\u30c6\u30fc\u30de' },
+    { href: _base + '/#research',   label: '\u7814\u7a76\u30c6\u30fc\u30de' },
     /* \u30e1\u30f3\u30d0\u30fc = メンバー */
-    { href: '/#members',    label: '\u30e1\u30f3\u30d0\u30fc' },
+    { href: _base + '/#members',    label: '\u30e1\u30f3\u30d0\u30fc' },
     /* \u6d3b\u52d5\u30d6\u30ed\u30b0 = 活動ブログ */
-    { href: '/events.html', label: '\u6d3b\u52d5\u30d6\u30ed\u30b0' },
+    { href: _base + '/events.html', label: '\u6d3b\u52d5\u30d6\u30ed\u30b0' },
     /* \u30a2\u30af\u30bb\u30b9 = アクセス */
-    { href: '/#access',     label: '\u30a2\u30af\u30bb\u30b9' }
+    { href: _base + '/#access',     label: '\u30a2\u30af\u30bb\u30b9' }
   ];
   navLinks.forEach(function (item) {
     var a = document.createElement('a');
@@ -93,7 +107,7 @@
 
   var back = document.createElement('a');
   back.className = 'eh-back';
-  back.href = '/events.html';
+  back.href = _base + '/events.html';
   /* \u2190 \u30d6\u30ed\u30b0\u4e00\u89a7 = ← ブログ一覧 */
   back.textContent = '\u2190 \u30d6\u30ed\u30b0\u4e00\u89a7';
   header.appendChild(back);
