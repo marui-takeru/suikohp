@@ -11,7 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const navList = document.querySelector('nav ul');
 
     if (toggle && navList) {
-        toggle.addEventListener('click', () => {
+        const closeMenu = () => {
+            navList.classList.remove('open');
+            toggle.classList.remove('open');
+            document.body.style.overflow = '';
+        };
+
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
             const open = navList.classList.toggle('open');
             toggle.classList.toggle('open', open);
             document.body.style.overflow = open ? 'hidden' : '';
@@ -19,11 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Close on nav link click
         navList.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navList.classList.remove('open');
-                toggle.classList.remove('open');
-                document.body.style.overflow = '';
-            });
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Close when tapping outside the menu
+        document.addEventListener('click', (e) => {
+            if (navList.classList.contains('open') &&
+                !navList.contains(e.target) &&
+                !toggle.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMenu();
         });
     }
 

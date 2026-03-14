@@ -63,19 +63,30 @@ header {
   inset: 0 0 auto 0;
   z-index: 1000;
   padding: 1.1rem 2rem;
-  background: rgba(7, 17, 30, 0.75);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  /* backdrop-filter を ::before に移動 — これをしないと子の position:fixed が
+     viewport 基準にならずモバイルメニューが全画面にならない */
   border-bottom: 1px solid var(--border-base);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: padding .3s var(--ease), background .3s;
+  transition: padding .3s var(--ease);
+}
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 17, 30, 0.75);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  z-index: -1;
+  transition: background .3s;
 }
 header.scrolled {
   padding: .75rem 2rem;
-  background: rgba(7, 17, 30, 0.94);
   box-shadow: 0 1px 0 var(--border-base), var(--shadow-md);
+}
+header.scrolled::before {
+  background: rgba(7, 17, 30, 0.94);
 }
 
 .logo {
@@ -117,6 +128,8 @@ nav a:hover {
   border-radius: var(--r-sm);
   cursor: pointer;
   gap: 5px;
+  position: relative; /* メニューオーバーレイより前面に出す */
+  z-index: 10001;
 }
 .nav-toggle span {
   display: block;
@@ -701,20 +714,33 @@ footer .footer-copy {
     display: none;
     position: fixed;
     inset: 0;
-    z-index: 999;
+    z-index: 10000; /* ヘッダー(1000)より上、ハンバーガー(10001)より下 */
     background: rgba(7, 17, 30, .97);
     backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: .25rem;
     padding: 2rem;
+    /* フェードイン */
+    opacity: 0;
+    transition: opacity .25s;
   }
-  nav ul.open { display: flex; }
+  nav ul.open {
+    display: flex;
+    opacity: 1;
+  }
   nav ul a {
-    font-size: 1.2rem;
-    padding: .75rem 2rem;
+    font-size: 1.25rem;
+    padding: 1rem 2.5rem;
     color: var(--text-primary);
+    border-radius: 12px;
+    transition: background .15s;
+  }
+  nav ul a:hover,
+  nav ul a:active {
+    background: rgba(255,255,255,.07);
   }
 
   .stats-row { gap: .875rem; }
@@ -729,4 +755,17 @@ footer .footer-copy {
   .stats-row { grid-template-columns: 1fr; }
   .research-grid,
   .blog-grid { grid-template-columns: 1fr; }
+
+  /* Hero h1: モバイルで大きすぎるのを抑制 */
+  .hero h1 {
+    font-size: 1.75rem;
+    letter-spacing: -.01em;
+  }
+
+  /* インスタボタンが折り返さないように */
+  .btn-instagram {
+    font-size: .82rem !important;
+    padding: .75rem 1.25rem !important;
+    white-space: nowrap;
+  }
 }
