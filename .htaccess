@@ -1,0 +1,4 @@
+# Remove server-forced charset header so each file's own <meta charset> is respected.
+# - index.html / events.html  → UTF-8 (declared in their <meta charset="UTF-8">)
+# - legacy event pages        → Shift_JIS (declared in their <META http-equiv Content-Type>)
+AddDefaultCharset off
