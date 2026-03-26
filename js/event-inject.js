@@ -17,7 +17,7 @@
 
   /* ── Hide old nav/header/footer elements immediately ─── */
   var hideStyle = document.createElement('style');
-  hideStyle.textContent = '#menu,#icatch,#navi,#header,div.menu,div.navi,div#footer,div#footMenu{display:none!important}body{padding-top:64px!important}';
+  hideStyle.textContent = '#menu,#icatch,#navi,#header,div.menu,div.navi,div#footer,div#footMenu,#main2 h2,#totop{display:none!important}body{padding-top:64px!important}';
   document.head.appendChild(hideStyle);
 
   /* ── Inject Google Fonts (Inter) ─────────────────────── */

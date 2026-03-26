@@ -13,7 +13,7 @@ a {
     color: #00d2ff !important;
 }
 
-/* Hide old navigation, header, and footer elements */
+/* Hide old navigation, header, footer and boilerplate headings */
 #menu,
 #icatch,
 #navi,
@@ -22,7 +22,9 @@ div.navi,
 div.header,
 div#header,
 div#footer,
-div#footMenu {
+div#footMenu,
+#main2 h2,
+#totop {
     display: none !important;
 }
 
